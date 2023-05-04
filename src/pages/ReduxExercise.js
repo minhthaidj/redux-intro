@@ -51,7 +51,7 @@ const ProductPage = (props) => {
         <Grid item md={6} xs={12}>
           <ProductOne />
         </Grid>
-        <Grid item md={6} xs={12}>
+        <Grid item md={6} sx={12}>
           <ProductTwo />
         </Grid>
       </Grid>
@@ -78,13 +78,13 @@ const CartPage = (props) => {
         {`})`}
       </Typography>
       <Grid container spacing={2} p="1rem">
-        <Grid item md={6} xs={12}>
+        <Grid item md={6} sx={12}>
           <CartProductOne />
         </Grid>
-        <Grid item md={6} xs={12}>
+        <Grid item md={6} sx={12}>
           <CartProductTwo />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item sx={12}>
           <Typography p="0.5rem" variant="h5">
             Total Price: 💵 {totalPrice}
           </Typography>
@@ -107,18 +107,19 @@ const ProductOne = (props) => {
   // Make the function handle onClick event of the button
   // eslint-disable-next-line
   const dispatch = useDispatch();
+
   const addProduct = () => {
     dispatch(addToCart(product));
+  };
+
+  const removeProduct = () => {
+    dispatch(removeCart(product));
   };
 
   // Step 8
   // Create a function to handle click event of the button Remove
   // In the function, dispatch cartActions.removeProduct(product) to trigger the action remove product from the cart
   // Make the function handle onClick event of the button
-
-  const removeProduct = () => {
-    dispatch(removeCart(product));
-  };
 
   return (
     <WrapperBox>
@@ -181,7 +182,6 @@ const ProductTwo = (props) => {
   const removeProduct = () => {
     dispatch(removeCart(product));
   };
-
   return (
     <WrapperBox>
       <Typography
@@ -228,9 +228,9 @@ const ProductTwo = (props) => {
 const CartProductOne = (props) => {
   // Step 2
   // Replace the line below to get data of the first product from state.cart.products
-  // Change the price of products in `service/cart/slice.js` to see the effect
+  // Change the price of products in `cart.reducer.js` to see the effect
   const product = useSelector((state) => state.cart.products[0]);
-
+  console.log("prodcut", product);
   return (
     <WrapperBox>
       <Typography
@@ -261,8 +261,8 @@ const CartProductOne = (props) => {
 const CartProductTwo = (props) => {
   // Step 3
   // Replace the line below to get data of the second product from state.cart.products
-  // Change the price of products in `service/cart/slice.js` to see the effect
-  const product = useSelector((state) => state.cart.products[0]);
+  // Change the price of products in `cart.reducer.js` to see the effect
+  const product = useSelector((state) => state.cart.products[1]);
 
   return (
     <WrapperBox>
@@ -292,10 +292,9 @@ const CartProductTwo = (props) => {
 const Store = (props) => {
   // Step 1
   // use useSelector() to get the data of products and cart in the store
-  // pass {cart, product} to the src attribute of the component <ReactJson/>
+  // pass {products, cart} to the src attribute of the component <ReactJson/>
   const products = useSelector((state) => state.product);
   const cart = useSelector((state) => state.cart);
-
   return (
     <WrapperBox>
       <Typography
@@ -318,7 +317,7 @@ const Store = (props) => {
   );
 };
 
-const ReduxExercise = () => {
+const ReduxFinal = () => {
   return (
     <Container maxWidth="xxl">
       <br />
@@ -336,4 +335,4 @@ const ReduxExercise = () => {
   );
 };
 
-export default ReduxExercise;
+export default ReduxFinal;
